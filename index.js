@@ -2371,6 +2371,8 @@ module.query = function(context, entity, criteria) {
         resolve(data)
       }
     }).catch(function(err) {
+      err.name = 'Query Error';
+      err.message = 'Query Error: See Fault Object';
       reject(err)
     })
   })
