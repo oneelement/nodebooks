@@ -2332,8 +2332,8 @@ module.query = function(context, entity, criteria) {
   }
 
   if (criteria && !_.isFunction(criteria)) {
-    url += module.criteriaToString(criteria) || ''
-    url = url.replace(/%/g, '%25')
+    var encoded_criteria = module.criteriaToString(criteria) || ''
+    encoded_criteria = encoded_criteria.replace(/%/g, '%25')
              .replace(/'/g, '%27')
              .replace(/=/g, '%3D')
              .replace(/</g, '%3C')
@@ -2342,7 +2342,12 @@ module.query = function(context, entity, criteria) {
              .replace(/#/g, '%23')
              .replace(/\\/g, '%5C')
              .replace(/\+/g, '%2B')
+             .replace(/\(/g, '%28')
+             .replace(/\)/g, '%29')
+             .replace(/\//g, '%2F')
+             .replace(/\|/g, '%7C')
   }
+  url += encoded_criteria
   url = url.replace('@@', '=')
 
   return new Promise(function(resolve, reject) {
