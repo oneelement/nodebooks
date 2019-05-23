@@ -2346,6 +2346,7 @@ module.query = function(context, entity, criteria) {
              .replace(/\)/g, '%29')
              .replace(/\//g, '%2F')
              .replace(/\|/g, '%7C')
+             .replace(/\u2013|\u2014/g, '-')
   }
   url += encoded_criteria
   url = url.replace('@@', '=')
